@@ -3,6 +3,8 @@ package com.llf.translucent;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
+import com.r0adkll.slidr.Slidr;
+
 /**
  * Created by llf on 2017/9/15.
  */
@@ -22,6 +24,11 @@ public class DetailActivity extends BaseActivity {
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
+    }
+
+    @Override
+    protected void setSlide() {
+        Slidr.attach(this);
     }
 
     @Override
