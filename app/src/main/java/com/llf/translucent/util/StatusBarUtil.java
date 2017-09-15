@@ -49,7 +49,9 @@ public class StatusBarUtil {
 
     public static void setColor(Activity activity, @ColorInt int color, @IntRange(from = 0, to = 255) int statusBarAlpha) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            //需要设置这个 flag 才能调用 setStatusBarColor 来设置状态栏颜色
             activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            //取消透明状态栏,这样才能让 ContentView 向上
             activity.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
             activity.getWindow().setStatusBarColor(calculateStatusColor(color, statusBarAlpha));
         } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
@@ -89,7 +91,7 @@ public class StatusBarUtil {
                                             @IntRange(from = 0, to = 255) int statusBarAlpha) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
 
-            ViewGroup contentView = ((ViewGroup) activity.findViewById(android.R.id.content));
+            ViewGroup contentView = (activity.findViewById(android.R.id.content));
             View rootView = contentView.getChildAt(0);
             int statusBarHeight = getStatusBarHeight(activity);
             if (rootView != null && rootView instanceof CoordinatorLayout) {
